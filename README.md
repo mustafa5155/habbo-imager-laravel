@@ -93,3 +93,9 @@ php artisan serve
 - **Normal mode** — Enter a figure string or username to preview
 - **Advanced mode** — Browse categories, pick sets, change colors, and build a figure visually
 - **Layer Debugger** — Visit `/imager/debug/layers` with a figure to inspect individual compositing layers
+
+## Known Issues
+
+- **Figure string accuracy** — Some figure strings produce cropped or misaligned output compared to the official Habbo client. The dresser uses its own composition logic rather than the game's exact rendering pipeline, so results won't always match what you'd see in-game.
+
+- **Slow initial load** — The first page visit after serving the project can be slow if the sync command hasn't finished populating the blob tables. Views may time out or appear broken until `php artisan habbo-imaging:sync` completes. Run the sync before pointing anyone at the site.
