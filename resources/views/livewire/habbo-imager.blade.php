@@ -541,11 +541,6 @@
     </style>
 
     <div class="habbo-imager {{ $mode === 'advanced' ? 'is-advanced' : '' }}">
-        <div class="habbo-imager__tabs">
-            <button type="button" class="habbo-imager__tab {{ $mode === 'normal' ? 'is-active' : '' }}" wire:click="setMode('normal')">Normal Imager</button>
-            <button type="button" class="habbo-imager__tab {{ $mode === 'advanced' ? 'is-active' : '' }}" wire:click="setMode('advanced')">Advanced Imager</button>
-        </div>
-
         <div class="habbo-imager__grid">
             <div class="habbo-imager__card">
                 @if ($mode === 'normal')
@@ -936,23 +931,21 @@
                         @else
                             <span style="color: #9ca3af;">Enter a Habbo name or figure string.</span>
                         @endif
-                        @if ($mode === 'advanced')
-                            @if ($this->debuggerUrl)
-                                <a 
-                                    href="{{ $this->debuggerUrl }}"
-                                    target="_blank"
-                                    class="habbo-imager__copy-button habbo-imager__copy-button--inside"
-                                    aria-label="Open layer debugger"
-                                    title="Open debugger"
-                                >
-                                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <path d="M14.7 6.3l3 3"></path>
-                                        <path d="M7 17l3-3"></path>
-                                        <path d="M14 10l-4 4"></path>
-                                    </svg>
-                                </a>
-                            @endif
+                        @if ($this->debuggerUrl)
+                            <a 
+                                href="{{ $this->debuggerUrl }}"
+                                target="_blank"
+                                class="habbo-imager__copy-button habbo-imager__copy-button--inside"
+                                aria-label="Open layer debugger"
+                                title="Open debugger"
+                            >
+                                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M14.7 6.3l3 3"></path>
+                                    <path d="M7 17l3-3"></path>
+                                    <path d="M14 10l-4 4"></path>
+                                </svg>
+                            </a>
                         @endif
                     </div>
 

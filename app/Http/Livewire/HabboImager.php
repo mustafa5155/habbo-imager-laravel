@@ -655,7 +655,7 @@ class HabboImager extends Component
 
     public function getDebuggerUrlProperty(): string
     {
-        if (trim($this->figure) === '' || empty($this->advancedDresser['version'])) {
+        if (trim($this->figure) === '') {
             return '';
         }
 
