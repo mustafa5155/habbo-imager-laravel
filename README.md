@@ -12,24 +12,84 @@ A Laravel implementation of native Habbo imager using blob storage for files ext
 
 ## Setup
 
+### Requirements
+- PHP 8.3+
+- GD extension (for image compositing)
+- Composer
+- Laravel 13
+- SQLite (default) or MySQL
+
+### Installation
+
 ```bash
 git clone https://github.com/mustafa5155/habbo-imager-laravel.git
 cd habbo-imager-laravel
 composer install
+```
+
+### Environment
+
+```bash
 cp .env.example .env
 php artisan key:generate
+```
+
+Edit `.env` to configure your database. The default is SQLite (zero config):
+
+```
+DB_CONNECTION=sqlite
+```
+
+For MySQL, use:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=habbo_imager
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### Database
+
+Run migrations to create all required tables:
+
+```bash
 php artisan migrate
+```
+
+This creates these tables:
+- `habbo_imaging_versions` — tracks sync runs and metadata versions
+- `habbo_imaging_assets` — tracks each SWF library asset and its extraction status
+- `habbo_imaging_asset_blobs` — stores extracted bitmap PNGs by symbol name
+- `habbo_imaging_render_blobs` — caches fully composited figure renders
+- `habbo_imaging_xml_documents` — stores XML/manifest data extracted from SWF files
+
+### Storage
+
+```bash
 php artisan storage:link
 ```
 
-Populate the database with Habbo assets:
+### Populate Assets
+
+Download and extract all Habbo figure assets:
 
 ```bash
 php artisan habbo-imaging:sync
 ```
 
-This will download all required assets from Habbo's servers. Depending on your connection, this takes a few minutes. Run it multiple times — it processes assets in batches and picks up where it left off.
+This processes assets in batches. Run it multiple times — it picks up where it left off until all libraries are extracted.
 
-Once complete, visit `/imager` to use the dresser.
+## Usage
 
-Requirements: PHP 8.3+, GD extension, Laravel 13.
+Visit `/imager` in your browser after serving:
+
+```bash
+php artisan serve
+```
+
+- **Normal mode** — Enter a figure string or username to preview
+- **Advanced mode** — Browse categories, pick sets, change colors, and build a figure visually
+- **Layer Debugger** — Visit `/imager/debug/layers` with a figure to inspect individual compositing layers
