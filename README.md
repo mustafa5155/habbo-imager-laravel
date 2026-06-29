@@ -2,7 +2,7 @@
 
 A Laravel implementation of native Habbo imager using blob storage for files extracted from .swf assets.
 
-## How it Works
+## Utility
 
 1. **Sync Command** — `php artisan habbo-imaging:sync` downloads figuredata, figuremap, and asset SWF files from Habbo's CDN, extracts all bitmaps and XML metadata, and stores them as blobs in the database.
 2. **Blob Storage** — Asset images (PNGs extracted from SWF) and rendered composites are stored in database tables, eliminating the need for a file system of thousands of tiny images.
